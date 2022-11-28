@@ -556,7 +556,11 @@ class OpenADRClient:
         report_request_id = report_request['report_request_id']
         report_specifier_id = report_request['report_specifier']['report_specifier_id']
         report_back_duration = report_request['report_specifier'].get('report_back_duration')
+        if report_back_duration == timedelta():
+            report_back_duration = None
         granularity = report_request['report_specifier']['granularity']
+        if granularity == timedelta():
+            granularity = None
 
         # Check if this report actually exists
         report = utils.find_by(self.reports, 'report_specifier_id', report_specifier_id)
