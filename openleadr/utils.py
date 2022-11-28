@@ -600,6 +600,8 @@ def get_active_period_from_intervals(intervals, as_dict=True):
 
 
 def determine_event_status(active_period):
+    if getmember(active_period, 'duration') == timedelta():
+        return 'active'
     now = datetime.now(timezone.utc)
     active_period_start = getmember(active_period, 'dtstart')
     if active_period_start.tzinfo is None:
